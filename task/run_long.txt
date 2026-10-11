@@ -1,0 +1,15 @@
+﻿ELIGIBLE: You may write the end-semester exam.
+CONDONATION: You need to pay Rs. 500 per course.
+NOT ELIGIBLE: Attendance below 65% does not meet the exam requirement.
+ERROR: Attendance percentage must be between 0 and 100.
+
+[task-run] USER: What CGPA do I need to be eligible for placements?
+   agent  -> call search_handbook({'query': 'placement eligibility CGPA'})
+   tools  -> search_handbook returned '[placement_policy.md] # Placement Policy (Greenfield Co'...
+   agent  -> ANSWER: You need a CGPA of **6.5 or higher** to be eligible for campus placements. (Source: *placement_policy.md*)
+
+[task-run] USER: My attendance is 70%. Can I write the exam?
+   agent  -> call check_exam_eligibility({'attendance_percent': 70})
+   tools  -> check_exam_eligibility returned 'CONDONATION: You need to pay Rs. 500 per course.'...
+   agent  -> call search_handbook({'query': 'attendance 90% pre-placement training'})
+   tools  -> search_handbook returned '[placement_policy.md] ## Pre-placement training\n\nA mini'...
